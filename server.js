@@ -120,9 +120,11 @@ const server = http.createServer((req, res) => {
   }
 
   const routeMap = {
-    '/': path.join(ROOT, 'share_my_location.html'),
-    '/share_my_location.html': path.join(ROOT, 'share_my_location.html'),
-    '/read_locations.html': path.join(ROOT, 'read_locations.html')
+    '/': path.join(ROOT, 'tracker.html'),
+    '/tracker.html': path.join(ROOT, 'tracker.html'),
+    '/saved.html': path.join(ROOT, 'saved.html'),
+    '/share_my_location.html': path.join(ROOT, 'tracker.html'),
+    '/read_locations.html': path.join(ROOT, 'saved.html')
   };
 
   const filePath = routeMap[url.pathname];

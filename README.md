@@ -18,8 +18,8 @@ A simple project with two web pages:
 2. Start the server:
    - `node server.js`
 3. Open:
-   - `http://localhost:3001/share_my_location.html`
-   - `http://localhost:3001/read_locations.html`
+   - `http://localhost:3001/tracker.html`
+   - `http://localhost:3001/saved.html`
 
 ## Deploy to Render
 
@@ -33,8 +33,8 @@ A simple project with two web pages:
 ## Files
 
 - `server.js` - HTTP server and API
-- `share_my_location.html` - location capture page
-- `read_locations.html` - read saved data page
+- `tracker.html` - capture page
+- `saved.html` - saved data page
 - `data/locations.json` - saved entries
 
 ## Notes
