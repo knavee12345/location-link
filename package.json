@@ -1,0 +1,9 @@
+{
+  "name": "location-tracker",
+  "version": "1.0.0",
+  "description": "Simple location tracker with two pages and a local backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #f2f5f4;
+      font-family: Arial, sans-serif;
+      color: #1d2a28;
+    }
+    .card {
+      width: min(90vw, 520px);
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+      padding: 28px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+    }
+    p {
+      line-height: 1.6;
+      color: #445a56;
+    }
+    button {
+      background: #1f4d46;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    button:disabled {
+      opacity: 0.7;
+      cursor: wait;
+    }
+    a {
+      color: #1f4d46;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .status {
+      min-height: 24px;
+      margin-top: 18px;
+      font-size: 0.96rem;
+      color: #2f4d49;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Welcome</h1>
+    <p>Detecting your location automatically.</p>
+    <div id="status" class="status">Requesting location…</div>
+  </div>
+
+  <script>
+    const statusEl = document.getElementById('status');
+
+    if (!('geolocation' in navigator)) {
+      statusEl.textContent = 'Geolocation is not supported by this browser.';
+    } else {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const payload = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          accuracy: position.coords.accuracy,
+          timestamp: new Date(position.timestamp).toISOString()
+        };
+
+        try {
+          const response = await fetch('/api/location', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result.error || 'Could not save the location.');
+          }
+
+          statusEl.textContent = 'Location saved successfully.';
+        } catch (error) {
+          statusEl.textContent = error.message || 'Failed to save location.';
+        }
+      }, (error) => {
+        const messages = {
+          1: 'Permission denied. Please allow access to capture the location.',
+          2: 'Location is unavailable right now.',
+          3: 'Location request timed out.'
+        };
+        statusEl.textContent = messages[error.code] || 'Unable to get the location.';
+      }, {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 0
+      });
+    }
+  </script>
+</body>
+</html>

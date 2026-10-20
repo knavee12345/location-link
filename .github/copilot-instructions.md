@@ -1,0 +1,6 @@
+- Verify the project requirements.
+- Scaffold a minimal full-stack location tracker.
+- Keep the project easy to run locally.
+- Use a backend API to store location data.
+- Expose one page to capture location and one page to read stored entries.
+- Keep documentation and run instructions current.
