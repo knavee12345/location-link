@@ -21,6 +21,15 @@ A simple project with two web pages:
    - `http://localhost:3001/share_my_location.html`
    - `http://localhost:3001/read_locations.html`
 
+## Deploy to Render
+
+1. Create a new account at https://render.com
+2. In the Render dashboard, choose "New" > "Web Service"
+3. Connect this GitHub repository
+4. Use the following start command:
+   - `node server.js`
+5. Render will provide a public URL automatically
+
 ## Files
 
 - `server.js` - HTTP server and API
